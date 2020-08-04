@@ -77,7 +77,7 @@ public class ApiOfIceAndFire {
             assert member != null;
             String name = member.get("name").toString();
             swornMembersNames.add(name);
-            // Adds members names to member arraylist
+
         }
         displaySwornMembers(swornMembersNames);
 
