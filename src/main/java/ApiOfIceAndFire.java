@@ -1,3 +1,9 @@
+/*@author Marina
+* .This program allow the user to look up a character by a number
+* .It give the user an option to display the names of all sowrn members of the characters house
+* .It looks up all pov characters in the books published by "Bamtam Books" */
+
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -53,18 +59,19 @@ public class ApiOfIceAndFire {
         }
     }
 
+    //Get the character by the specific number of it and return a json object witch is used then in another method
     public static JSONObject getCharacter(String number) {
         String characterURL = "https://anapioficeandfire.com/api/characters/" + number;
         return getJSONObject(characterURL);
 
     }
-
+//Get the house of the character that the user looked up previously
     public static String getCharactersHouseUrl(JSONObject character) {
         String url = character.get("allegiances").toString();
         url = url.substring(2, url.length() - 2);              // Removes the extra "[ and ]" from the beginning and the end of the result
         return url;
     }
-
+//Get the sworn members names and display them
     public static void getSwornMembers(JSONObject membersHouse) {
         ArrayList<String> swornMembersNames = new ArrayList<>();
 
@@ -79,7 +86,7 @@ public class ApiOfIceAndFire {
             swornMembersNames.add(name);
 
         }
-        displaySwornMembers(swornMembersNames);
+        displaySwornMembers(swornMembersNames); // Display the members names
 
     }
 
@@ -100,7 +107,7 @@ public class ApiOfIceAndFire {
             System.out.println("If not yes then it means no ");
         }
     }
-
+// Display the character that the user wish to, and if the user wish so can the user display the names of the sworn members of the house of the character
     public static void displayCharacters(String number) {
 
         JSONObject character = getCharacter(number);
@@ -123,7 +130,7 @@ public class ApiOfIceAndFire {
 
     }
 
-    //****
+    //Gets the books witch published by "Bantam Books"
     public static JSONArray getBooks() {
         try {
             URL url = new URL("https://www.anapioficeandfire.com/api/books");
@@ -164,7 +171,7 @@ public class ApiOfIceAndFire {
             return null;
         }
     }
-
+// Get the pov characters of the books that is published by "Bantam Books"
     public static Map<String, String[]> getPOVCharacters() {
         JSONArray books = getBooks();
 
@@ -191,6 +198,7 @@ public class ApiOfIceAndFire {
         return bookPovListPair;
     }
 
+    //Display the pov characters and their books
     public static void displayPOVCharacters() {
         System.out.println("All this books are published by Bantam Books : ");
         System.out.println("Waiting.......");
